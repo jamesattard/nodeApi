@@ -10,4 +10,4 @@ const userSchema = new Schema({
   surname: String
 });
 
-mongoose.model("users", userSchema);
+module.exports = mongoose.model("users", userSchema);

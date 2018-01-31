@@ -7,7 +7,6 @@ const app = express();
 // DB setup
 const keys = require("./config/keys");
 mongoose.connect(keys.mongoURI);
-require("./models/User");
 
 // Middlewares
 app.use(morgan("combined"));

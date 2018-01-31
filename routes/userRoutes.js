@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const User = mongoose.model("users");
+const User = require("../models/User");
 const bodyLogger = require("../middlewares/bodyLogger");
 
 module.exports = app => {
@@ -21,7 +20,7 @@ module.exports = app => {
     });
 
     try {
-      let users = await user.save();
+      const users = await user.save();
       res.send(users);
     } catch (err) {
       next(err);
