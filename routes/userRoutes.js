@@ -13,15 +13,15 @@ module.exports = app => {
 
   app.post("/api/users", bodyLogger, async (req, res, next) => {
     const { username, name, surname } = req.body;
-    const user = new User({
+    const user = {
       username,
       name,
       surname
-    });
+    };
 
     try {
-      const users = await user.save();
-      res.send(users);
+      const newUser = await User.create(user);
+      res.send(newUser);
     } catch (err) {
       next(err);
     }
