@@ -26,4 +26,34 @@ module.exports = app => {
       next(err);
     }
   });
+
+  app.get("/api/users/:username", bodyLogger, async (req, res, next) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.put("/api/users/:username", bodyLogger, async (req, res, next) => {
+    try {
+      await User.findOneAndUpdate({ username: req.params.username }, req.body);
+      const user = await User.findOne({ username: req.params.username });
+      res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.delete("/api/users/:username", bodyLogger, async (req, res, next) => {
+    try {
+      const user = await User.findOneAndRemove({
+        username: req.params.username
+      });
+      res.send(user);
+    } catch (err) {
+      next(err);
+    }
+  });
 };
